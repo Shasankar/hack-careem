@@ -3,3 +3,12 @@ extends layout
 block content
   h1= title
   p Welcome to #{title}
+  form(name="get-a-car", method="get", action="/getCar")
+        div.input
+            input(type="text", name="lat", placeholder="Lattitude")
+            br
+            input(type="text", name="long", placeholder="Longitude")
+            br
+            br
+        div.actions
+            input(type="submit", value="Get Me A Car")
