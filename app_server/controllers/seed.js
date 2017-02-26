@@ -4,6 +4,8 @@ module.exports.index=function(req, res, next) {
   console.log(req.query.lat);
   console.log(req.query.long);
   console.log(req.query.avl);
+  var lati = parseInt(req.query.lat); 
+  var longi = parseInt(req.query.long);
 
   //debug 1
   client.cluster.health({},function(err,resp,status) {  
@@ -25,8 +27,10 @@ module.exports.index=function(req, res, next) {
   //seed elasticsearch with hardcoded values
   var myBody = [{ index: { _index: 'cab', _type: 'driver', _id: req.query.id } },
     {
-      Latitude: req.query.lat,
-      LongiTude: req.query.long,
+      location: {
+        lat: lati,
+        lon: longi
+      },
       Available: req.query.avl
     }];
   client.bulk({
